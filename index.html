@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Login</title>
+    <style>
+        /* Simple styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        label, input {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Staff Login</h2>
+
+    <!-- Display error message if no staff found or incorrect password -->
+    <% if (errorMessage) { %>
+        <p class="error"><%= errorMessage %></p>
+    <% } %>
+
+    <form action="/" method="GET">
+        <label for="staff_number">Staff Number:</label>
+        <input type="text" id="staff_number" name="staff_number" required>
+        
+        <label for="mobile_number">Mobile Phone Number (Password):</label>
+        <input type="password" id="mobile_number" name="mobile_number" required>
+
+        <!-- Show/Hide password toggle -->
+        <input type="checkbox" id="toggle-password" onclick="togglePassword()"> Show Password
+
+        <br><br>
+        
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- If staff is found, show their details -->
+    <% if (staff) { %>
+        <h3>Staff Details</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Staff Number</th>
+                    <th>Branch</th>
+                    <th>Region/Head Office Department</th>
+                    <th>Mobile Phone Number</th>
+                    <th>Work Email Address</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><%= staff.Full_Name %></td>
+                    <td><%= staff.Staff_Number %></td>
+                    <td><%= staff.Branch %></td>
+                    <td><%= staff.Region_Head_Office_Department %></td>
+                    <td><%= staff['Mobile Phone Number'] %></td>
+                    <td><%= staff.Work_Email_Address %></td>
+                    <td><%= staff.TOTAL %></td>
+                    <td><%= staff.STATUS %></td>
+                </tr>
+            </tbody>
+        </table>
+    <% } %>
+
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("mobile_number");
+            var toggleCheckbox = document.getElementById("toggle-password");
+
+            if (toggleCheckbox.checked) {
+                passwordField.type = "text";  // Show password
+            } else {
+                passwordField.type = "password";  // Hide password
+            }
+        }
+    </script>
+
+</body>
+</html>
