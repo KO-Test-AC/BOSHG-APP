@@ -3,14 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My GitHub Pages Site</title>
+    <title>Access MySQL Data</title>
 </head>
 <body>
     <header>
-        <h1>Welcome to My GitHub Pages Site</h1>
+        <h1>Data from MySQL</h1>
     </header>
     <main>
-        <p>This is a test page to check if GitHub Pages is working correctly!</p>
+        <div id="data-container">
+            <p>Loading data...</p>
+        </div>
     </main>
+
+    <script>
+        // Make an AJAX call to the backend API
+        fetch('http://your-server.com/data')  // Replace with your actual backend URL
+            .then(response => response.json())
+            .then(data => {
+                const dataContainer = document.getElementById('data-container');
+                dataContainer.innerHTML = '<ul>' + data.map(item => `<li>${item.name}</li>`).join('') + '</ul>';
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    </script>
 </body>
 </html>
